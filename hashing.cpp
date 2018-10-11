@@ -3,6 +3,7 @@
 #include<cstring>
 #include<vector>
 #include<list>
+#include<cmath>
 #include<cstdlib>
 
 using namespace std;
@@ -15,11 +16,23 @@ class hashTable {
 
 public:
 
-	hashTable(int t_size) {
-		vector< list< pair<T1,T2> > > tmp(10);		
-		v=tmp;
+	hashTable(int t_size) {		
 		cnt=0;
-		p=t_size;
+		p=getNextPrime(t_size);
+		vector< list< pair<T1,T2> > > tmp(p);		
+		v=tmp;
+	}
+
+	int getNextPrime(int t_size) {
+		bool flag=0;
+		int i = t_size+1;
+		while(flag=0) {
+			int limit = sqrt(i);	
+			for(int j=2;j<=limit;j++) 
+				if(i%j==0) {flag=1;break;}
+			i++;
+		}
+		return i;
 	}
 
 	int hash(T1 k) {
@@ -50,10 +63,13 @@ public:
 	}
 
 	void insert(T1 a,T2 b) {
-		int h = hash(a);
-		if(v[h].size()==0) cnt++;
-		v[h].push_back(make_pair(a,b));
-		if(float(cnt/p)>=0.75) cnt=rebuild_hash();
+		if(find(a)=="Not Found") {
+			int h = hash(a);
+			if(v[h].size()==0) cnt++;
+			v[h].push_back(make_pair(a,b));
+			if(float(cnt/p)>=0.75) cnt=rebuild_hash();
+		}
+		else cout<<"Key already present!"<<endl;
 	}
 
 	string find(T1 a) {
@@ -91,32 +107,35 @@ public:
 
 int main() {
 	int p;
+	cout<<"Enter hash table size - ";
 	cin>>p;
 
-	// hashTable<int,int>h1(10);
+	// hashTable<int,int>h1(p);
 	// h1.insert(23,65);
 	// h1.display();
 	// cout<<h1.find(23)<<endl;
 	// cout<<h1.find(10)<<endl;
+	// h1.insert(23,60);
+	// h1.insert(23,65);
 	// h1.remove(23);
 	// h1.display();
 	// cout<<endl;
 
-	// hashTable<string,int>h2(10);
+	// hashTable<string,int>h2(p);
 	// h2.insert("string 23",65);
 	// h2.display();
 	// cout<<h2.find("string 23")<<endl;
 	// h2.remove("string 23");
 	// h2.display();
 
-	// hashTable<string,string>h3(10);
+	// hashTable<string,string>h3(p);
 	// h3.insert("string 23","something");
 	// h3.display();
 	// cout<<h3.find("string 23")<<endl;
 	// h3.remove("string 23");
 	// h3.display();
 
-	// hashTable<int,string>h4(10);
+	// hashTable<int,string>h4(p);
 	// h4.insert(65,"string 23");
 	// h4.display();
 	// cout<<h4.find(65)<<endl;
