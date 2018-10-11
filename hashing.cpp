@@ -19,18 +19,20 @@ public:
 	hashTable(int t_size) {		
 		cnt=0;
 		p=getNextPrime(t_size);
+		cout<<"Table Size - "<<p<<endl;
 		vector< list< pair<T1,T2> > > tmp(p);		
 		v=tmp;
 	}
 
 	int getNextPrime(int t_size) {
-		bool flag=0;
+		bool flag=true;
 		int i = t_size+1;
-		while(flag=0) {
+		while(flag==true) {
+			flag=false;
 			int limit = sqrt(i);	
 			for(int j=2;j<=limit;j++) 
-				if(i%j==0) {flag=1;break;}
-			i++;
+				if(i%j==0) flag=true;
+			if(flag==true) i++;
 		}
 		return i;
 	}
