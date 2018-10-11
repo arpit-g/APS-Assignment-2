@@ -68,15 +68,19 @@ int main() {
 		int index = nth_smallest(a,0,n-1,k-1);
 		time = clock()-time;
 		double time_taken = ((double)time)/CLOCKS_PER_SEC;
-		cout<<"My implementation - "<<time_taken<<endl;
+		cout<<"My implementation - "<<endl;
+		cout<<"Element - "<<a[index]<<endl;
+		cout<<"time_taken - "<<time_taken<<endl;
 
 		time = clock();
 		nth_element(b,b+k-1,b+n);
 		time = clock()-time;
 		time_taken = ((double)time)/CLOCKS_PER_SEC;
-		cout<<"STL's implementation - "<<time_taken<<endl;
-		if(b[k-1]!=a[index]) flag=1;
-		cout<<endl;
+		cout<<"STL's implementation - "<<endl;
+		cout<<"Element - "<<b[k-1]<<endl;
+		cout<<"time_taken - "<<time_taken<<endl<<endl;
+		// if(b[k-1]!=a[index]) flag=1;
+		// cout<<endl;
 		// int y;
 		// cin>>y;		
 	}
