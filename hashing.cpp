@@ -108,12 +108,19 @@ public:
 		if(float(cnt/p)>=0.75) cnt=rebuild_hash();
 	}
 
-	T2 find(T1 a) {
+	string find(T1 a) {
+		// T2 ret_val = 
 		int h = hash(a);
 		for(typename list< pair<T1,T2> >::iterator it=v[h].begin();it!=v[h].end();it++) {
-			if(it->first==a) return it->second;
-		}
-		
+			if(it->first==a) {
+				ostringstream str;
+				str<<it->second;
+				string l = str.str();
+				return l;
+			}
+		}		
+		// if(T2==int) return -1;
+		return "Not Found";
 	}
 
 	void remove(T1 a) {
@@ -143,6 +150,7 @@ int main() {
 	h1.insert(23,65);
 	h1.display();
 	cout<<h1.find(23)<<endl;
+	cout<<h1.find(10)<<endl;
 	h1.remove(23);
 	h1.display();
 	cout<<endl;

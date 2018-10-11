@@ -176,7 +176,7 @@ stringBuilder stringAppend(stringBuilder& s1,stringBuilder& s2) {
 }
 
 int* calculateLPS(const char* pat,int pat_length) {
-	int lps[pat_length];
+	int* lps = new int[pat_length];
 	int i=0,cnt=0;
 	while(i<pat_length) {
 		if(i==0) {lps[i]=0;i++;}
@@ -202,19 +202,31 @@ int* calculateLPS(const char* pat,int pat_length) {
 
 int findSubstring(stringBuilder s,const char* pat) {
 	int pat_length = strlen(pat);
+	
 	int* lps = calculateLPS(pat,pat_length);
+	
 	char* st = s.generateString();
+	
 	int i = 0,j = 0;
 	while(i<strlen(st)) {
 		// cout<<i<<" "<<j<<endl;
+		debug("tmlk");
+		debug(i);
 		if(st[i]==pat[j]) {
 			i++;j++;
 		}
+
 		if(j==pat_length) {
 			return i-j;
 		}
+
+		//debug(i*i*i);
 		else if(i<strlen(st) && st[i]!=pat[j]){
-			if(j!=0) j = lps[j-1];
+			if(j!=0)
+			{
+				cout<<sizeof(lps)/sizeof(int)<<" "<<j-1<<endl;
+				j = lps[j-1];
+			}
 			else i++;
 		}
 	}
@@ -229,15 +241,25 @@ void func(stringBuilder s) {
 }
 
 int main() {
+	debug(1);
+	stringBuilder s1 = stringInitialize("dsra");
 	
-	// stringBuilder s1 = stringInitialize("dAba");
-	// stringBuilder s2 = stringInitialize("daba");	
-	// stringBuilder s3 = stringAppend(s1,s2);	
-	// int index = findSubstring(s3,"Ar");
-	// s3.display();
-	// cout<<index<<endl;
-	// index = findSubstring(s2,"Ar");
-	// cout<<index<<endl;
+	debug(2);
+	stringBuilder s2 = stringInitialize("daba");	
+	
+	debug(3);
+	stringBuilder s3 = stringAppend(s1,s2);	
+	
+	debug(4);
+	int index = findSubstring(s3,"sr");
+	
+	debug(5);
+	s3.display();
+	
+	debug(6);
+	cout<<index<<endl;
+	index = findSubstring(s2,"sr");
+	cout<<index<<endl;
 
 	// stringBuilder str1 = stringInitialize("DABA");
  //    stringBuilder str2 = stringInitialize("DABA");
@@ -249,19 +271,19 @@ int main() {
  //    str5.display();
  //    stringBuilder str6 = stringAppend(str3,str4);
  //    stringBuilder str7 = stringAppend(str5,str6);
-    stringBuilder st1 = stringInitialize("hello");
-    stringBuilder st2 = stringInitialize("world");
-    stringBuilder st3 = stringInitialize("my");
-    stringBuilder st4 = stringInitialize("bae"); 
-    stringBuilder st5 = stringAppend(st1,st2); 
-    stringBuilder st6 = stringAppend(st3,st4);
-    stringBuilder st7 = stringAppend(st5,st6);
-    stringBuilder str8 = stringAppend(st7,st7);
-    str8.display();
-    cout<<endl;
-    st7.display();
-    cout<<endl;
-    cout<<findSubstring(str8, "yb")<<endl;
+    // stringBuilder st1 = stringInitialize("hello");
+    // stringBuilder st2 = stringInitialize("world");
+    // stringBuilder st3 = stringInitialize("my");
+    // stringBuilder st4 = stringInitialize("bae"); 
+    // stringBuilder st5 = stringAppend(st1,st2); 
+    // stringBuilder st6 = stringAppend(st3,st4);
+    // stringBuilder st7 = stringAppend(st5,st6);
+    // stringBuilder str8 = stringAppend(st7,st7);
+    // str8.display();
+    // cout<<endl;
+    // st7.display();
+    // cout<<endl;
+    // cout<<findSubstring(str8, "yb")<<endl;
 	
 	return 0;
 }

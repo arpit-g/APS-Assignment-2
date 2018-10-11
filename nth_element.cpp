@@ -1,5 +1,6 @@
 #include<iostream>
 #include<cstdlib>
+#include<bits/stdc++.h>
 
 using namespace std;
 
@@ -35,7 +36,7 @@ int partition(int a[],int low,int high,int pivot) {
 int nth_smallest(int a[],int low,int high,int n) {
 	if(low<high) {
 		//cout<<low<<" "<<high<<endl;
-		int pivot = low + rand()%(high-low+1);
+		int pivot = low + rand()%(high-low);
 		int part_index = partition(a,low,high,pivot);
 		//cout<<pivot<<" "<<part_index<<endl;
 		if(part_index-low==n) return part_index;		
@@ -49,18 +50,34 @@ int nth_smallest(int a[],int low,int high,int n) {
 }
 
 int main() {
-	int a[10];
-	for(int i=0;i<10;i++) {
-		a[i]=rand()%100+1;
-		cout<<a[i]<<" ";
+	freopen("infile.txt","r",stdin);
+	int t;
+	cin>>t;
+	int flag=0;
+	while(t--) {
+		int n,k;
+		cin>>n>>k;
+		int a[n],b[n];
+		for(int i=0;i<n;i++) {
+			// a[i]=rand()%1000000+1;
+			cin>>a[i];
+			b[i]=a[i];
+			// cout<<a[i]<<" ";
+		}
+		// int k;
+		// cin>>k;
+		// cout<<endl;
+		// for(int i=0;i<n;i++) {
+			// cout<<"For "<<i<<" "<<endl;
+			int index = nth_smallest(a,0,n-1,k-1);
+			nth_element(b,b+k-1,b+n);
+			if(b[k-1]!=a[index]) flag=1;
+			// cout<<"Answer - "<<index<<" ";
+			// cout<<a[index]<<" "<<b[k-1]<<endl;
 	}
-	cout<<endl;
-	for(int i=1;i<=10;i++) {
-		// cout<<"For "<<i<<" "<<endl;
-		int index = nth_smallest(a,0,9,i-1);
-		// cout<<"Answer - "<<index<<" ";
-		cout<<i<<"-"<<a[index]<<endl;
-	}
+	if(flag==1) cout<<"Lg gye"<<endl;
+	else cout<<"All ok"<<endl;
+	// }
 	// for(int i=0;i<10;i++) cout<<a[i]<<" ";
 	// cout<<endl;	
 	return 0;
