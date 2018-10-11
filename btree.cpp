@@ -1,7 +1,6 @@
 #include<iostream>
 
 using namespace std;
-#define debug(x) cout<<"Checkpoint "<<x<<endl
 
 class bTreeNode {
 
@@ -360,32 +359,32 @@ public:
 };
 
 int main() {
-	bTree b(3);
-	b.insert(10);
+	// bTree b(3);
+	// b.insert(10);
+	// // b.display();
+	// b.insert(20);
+	// b.insert(30);
+	// b.insert(40);
+	// b.insert(50);
+	// // debug(2);
+	// b.insert(60);
+	// b.insert(70);	
+	// b.insert(80);
+	// // debug(2);
+	// // b.display();
+	// b.insert(90);	
+	// b.insert(45);
+	// b.insert(46);
+	// b.insert(47);
+	// // debug("from here");
+	// b.insert(48);
+	// // debug("sdfk");
 	// b.display();
-	b.insert(20);
-	b.insert(30);
-	b.insert(40);
-	b.insert(50);
-	// debug(2);
-	b.insert(60);
-	b.insert(70);	
-	b.insert(80);
-	// debug(2);
+	// cout<<endl;
+	// // if(b.search(60)) cout<<"Found"<<endl;
+	// // else cout<<"Not Found"<<endl;
+	// b.remove(70);
+	// b.remove(80);
 	// b.display();
-	b.insert(90);	
-	b.insert(45);
-	b.insert(46);
-	b.insert(47);
-	// debug("from here");
-	b.insert(48);
-	// debug("sdfk");
-	b.display();
-	cout<<endl;
-	// if(b.search(60)) cout<<"Found"<<endl;
-	// else cout<<"Not Found"<<endl;
-	b.remove(70);
-	b.remove(80);
-	b.display();
 	return 0;
 }

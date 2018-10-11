@@ -1,5 +1,5 @@
-#include<iostream>
-#include<cstdlib>
+// #include<iostream>
+// #include<cstdlib>
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -52,6 +52,7 @@ int nth_smallest(int a[],int low,int high,int n) {
 int main() {
 	freopen("infile.txt","r",stdin);
 	int t;
+	clock_t time;
 	cin>>t;
 	int flag=0;
 	while(t--) {
@@ -59,26 +60,25 @@ int main() {
 		cin>>n>>k;
 		int a[n],b[n];
 		for(int i=0;i<n;i++) {
-			// a[i]=rand()%1000000+1;
 			cin>>a[i];
 			b[i]=a[i];
-			// cout<<a[i]<<" ";
 		}
-		// int k;
 		// cin>>k;
-		// cout<<endl;
-		// for(int i=0;i<n;i++) {
-			// cout<<"For "<<i<<" "<<endl;
-			int index = nth_smallest(a,0,n-1,k-1);
-			nth_element(b,b+k-1,b+n);
-			if(b[k-1]!=a[index]) flag=1;
-			// cout<<"Answer - "<<index<<" ";
-			// cout<<a[index]<<" "<<b[k-1]<<endl;
+		time = clock();
+		int index = nth_smallest(a,0,n-1,k-1);
+		time = clock()-time;
+		double time_taken = ((double)time)/CLOCKS_PER_SEC;
+		cout<<"My implementation - "<<time_taken<<endl;
+
+		time = clock();
+		nth_element(b,b+k-1,b+n);
+		time = clock()-time;
+		time_taken = ((double)time)/CLOCKS_PER_SEC;
+		cout<<"STL's implementation - "<<time_taken<<endl;
+		if(b[k-1]!=a[index]) flag=1;
+		cout<<endl;
+		// int y;
+		// cin>>y;		
 	}
-	if(flag==1) cout<<"Lg gye"<<endl;
-	else cout<<"All ok"<<endl;
-	// }
-	// for(int i=0;i<10;i++) cout<<a[i]<<" ";
-	// cout<<endl;	
 	return 0;
 }
